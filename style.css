@@ -1,6 +1,6 @@
 /* General Body and Form Container Styles */
 body {
-    font-family: 'Comic Sans MS', cursive, sans-serif; /* Fun, playful font */
+    /* Fun, playful font */
     background: linear-gradient(135deg, #f39c12, #f1c40f); /* Festive background gradient */
     margin: 0;
     padding: 0;
