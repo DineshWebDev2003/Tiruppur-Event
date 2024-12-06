@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration</title>
+    <link rel="stylesheet" href="style.css">
+   
+</head>
+
+<body>
+
+    <div class="form-container">
+        <h1>Student Registration</h1>
+        <form id="registrationForm" method="post" action="https://script.google.com/macros/s/AKfycbz_vOa7je7-Iybr9swowDLTJ1E6t9FMCQUW8NEckmX7flEwUam_4qrY1j7i1HzZbmnF/exec">
+            <!-- Student Name -->
+            <div class="form-group">
+                <label for="studentName">Student Name</label>
+                <input type="text" id="studentName" name="studentName" required>
+            </div>
+
+            <!-- Student Age -->
+            <div class="form-group">
+                <label for="studentAge">Student Age</label>
+                <input type="number" id="studentAge" name="studentAge" required>
+            </div>
+
+            <!-- Parent Name -->
+            <div class="form-group">
+                <label for="parentName">Parent Name</label>
+                <input type="text" id="parentName" name="parentName" required>
+            </div>
+
+            <!-- Sibling Checkbox -->
+            <div class="form-group checkbox-group">
+                <label for="hasSibling">Does the student have siblings?</label>
+                <input type="checkbox" id="hasSibling" name="hasSibling">
+            </div>
+
+            <!-- Sibling Details (Hidden by default) -->
+            <div id="siblingDetails" style="display: none;">
+                <div class="form-group">
+                    <label for="siblingName">Sibling Name</label>
+                    <input type="text" id="siblingName" name="siblingName">
+                </div>
+                <div class="form-group">
+                    <label for="siblingAge">Sibling Age</label>
+                    <input type="number" id="siblingAge" name="siblingAge">
+                </div>
+                <div class="form-group">
+                    <label for="competitionParticipation">Is the sibling participating in the competition?</label>
+                    <select id="competitionParticipation" name="competitionParticipation">
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Parent Phone Number -->
+            <div class="form-group">
+                <label for="parentPhone">Parent Phone Number</label>
+                <input type="tel" id="parentPhone" name="parentPhone" required>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="form-btn">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        // Show/Hide sibling details based on the checkbox
+        document.getElementById('hasSibling').addEventListener('change', function() {
+            const siblingDetails = document.getElementById('siblingDetails');
+            siblingDetails.style.display = this.checked ? 'block' : 'none';
+        });
+
+        // Handle form submission
+        document.getElementById('registrationForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // Collect the form data
+            const formData = new FormData(this);
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+
+            // Send data to your Web App (Replace the URL below with your actual Google Apps Script URL)
+            fetch('https://script.google.com/macros/s/AKfycbz_vOa7je7-Iybr9swowDLTJ1E6t9FMCQUW8NEckmX7flEwUam_4qrY1j7i1HzZbmnF/exec', { // Replace with your Web App URL
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.result === 'success') {
+                    alert('Form submitted successfully!');
+                    document.getElementById('registrationForm').reset(); // Reset form after submission
+                } else {
+                    alert('Error submitting form: ' + result.message);
+                }
+            })
+            .catch(error => {
+                alert('There was an error submitting the form.');
+                console.error(error);
+            });
+        });
+    </script>
+
+</body>
+
+</html>
