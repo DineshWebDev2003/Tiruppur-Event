@@ -1,6 +1,5 @@
 /* General Body and Form Container Styles */
 body {
-    /* Fun, playful font */
     background: linear-gradient(135deg, #f39c12, #f1c40f); /* Festive background gradient */
     margin: 0;
     padding: 0;
@@ -9,6 +8,7 @@ body {
     align-items: center;
     height: 100vh;
     background-size: cover;
+    background-image: url('bg.jpg');
 }
 
 /* Form Container */
